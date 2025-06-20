@@ -1,0 +1,49 @@
+# Dependencies
+
+node\_modules/
+
+# Local env files
+
+.env
+
+# Logs
+
+npm-debug.log\*
+yarn-debug.log\*
+pnpm-debug.log\*
+
+# VSCode settings
+
+.vscode/
+
+# macOS files
+
+.DS\_Store
+
+# TypeScript build info
+
+\*.tsbuildinfo
+
+# Coverage directory
+
+coverage/
+
+# TypeScript compiled output
+
+src/\*.js
+
+# Optional build output
+
+# dist/
+
+# Editor directories and files
+
+.idea/
+\*.suo
+*.ntvs*
+\*.njsproj
+\*.sln
+
+# Optional: ignore .user.js if built separately
+
+# dist/\*.user.js
