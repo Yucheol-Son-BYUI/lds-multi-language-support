@@ -17,7 +17,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 // @match        https://www.churchofjesuschrist.org/study/scriptures*
 // @match        https://www.churchofjesuschrist.org/study/scriptures/*
 // @icon         https://www.churchofjesuschrist.org/services/platform/v4/resources/static/image/favicon.ico
-// @grant        none
+// @grant        GM_registerMenuCommand
+// @grant        GM_getValue
+// @grant        GM_setValue
 // ==/UserScript==
 (function () {
     return __awaiter(this, void 0, void 0, function* () {
@@ -30,6 +32,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
                 this.verses = verses;
             }
         }
+        const DEFAULT_LANG = 'kor';
+        let lang = yield GM_getValue('lang', DEFAULT_LANG);
+        GM_registerMenuCommand(`Set Scripture Language (current: ${lang})`, () => __awaiter(this, void 0, void 0, function* () {
+            const choice = prompt('Choose language code(in the url, lang=???):\nex) eng, kor, jpn', lang);
+            if (!choice)
+                return;
+            lang = choice;
+            yield GM_setValue('lang', lang);
+            location.reload();
+        }));
         function getUrl(lang = "kor") {
             const url = new URL(location.href);
             url.searchParams.set('lang', lang);
@@ -126,20 +138,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
       </table>
     `;
         }
-        const original_Section = getSection();
-        const translated_Section = yield fetchSection("kor");
-        // console.log(original_Section)
-        // console.log(translated_Section)
-        // console.log(renderSections(original_Section, translated_Section))
-        // const wrapper = document.querySelector<HTMLDivElement>('div[class^="contentWrapper-"]'); // className of React
-        // if (wrapper) {
-        //   wrapper.innerHTML = renderSections(original_Section, translated_Section);
-        // }
         // To detect Routing by React
         function run() {
             return __awaiter(this, void 0, void 0, function* () {
                 const original_Section = getSection();
-                const translated_Section = yield fetchSection("kor");
+                const translated_Section = yield fetchSection(lang);
                 const wrapper = document.querySelector('div[class^="contentWrapper-"]');
                 if (wrapper) {
                     wrapper.innerHTML = renderSections(original_Section, translated_Section);

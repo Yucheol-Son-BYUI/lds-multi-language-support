@@ -7,7 +7,9 @@
 // @match        https://www.churchofjesuschrist.org/study/scriptures*
 // @match        https://www.churchofjesuschrist.org/study/scriptures/*
 // @icon         https://www.churchofjesuschrist.org/services/platform/v4/resources/static/image/favicon.ico
-// @grant        none
+// @grant        GM_registerMenuCommand
+// @grant        GM_getValue
+// @grant        GM_setValue
 // ==/UserScript==
 (async function() {
   'use strict';
@@ -29,6 +31,17 @@
       this.verses = verses;
     }
   }
+
+  const DEFAULT_LANG = 'kor';
+  let lang = await GM_getValue('lang', DEFAULT_LANG);
+
+  GM_registerMenuCommand(`Set Scripture Language (current: ${lang})`, async () => {
+    const choice = prompt('Choose language code(in the url, lang=???):\nex) eng, kor, jpn', lang);
+    if (!choice) return;
+    lang = choice;
+    await GM_setValue('lang', lang);
+    location.reload();
+  });
 
   function getUrl(lang: string = "kor"): string {
     const url = new URL(location.href);
@@ -149,7 +162,7 @@
   // To detect Routing by React
   async function run(): Promise<any> {
     const original_Section: Section = getSection();
-    const translated_Section: Section = await fetchSection("kor");
+    const translated_Section: Section = await fetchSection(lang);
     const wrapper = document.querySelector<HTMLDivElement>('div[class^="contentWrapper-"]');
     if (wrapper) {
       wrapper.innerHTML = renderSections(original_Section, translated_Section);
