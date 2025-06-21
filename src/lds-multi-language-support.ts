@@ -146,17 +146,6 @@
     `;
   }
 
-  const original_Section: Section = getSection()
-  const translated_Section: Section = await fetchSection("kor")
-  // console.log(original_Section)
-  // console.log(translated_Section)
-  // console.log(renderSections(original_Section, translated_Section))
-
-  // const wrapper = document.querySelector<HTMLDivElement>('div[class^="contentWrapper-"]'); // className of React
-  // if (wrapper) {
-  //   wrapper.innerHTML = renderSections(original_Section, translated_Section);
-  // }
-
   // To detect Routing by React
   async function run(): Promise<any> {
     const original_Section: Section = getSection();
