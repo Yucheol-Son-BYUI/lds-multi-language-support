@@ -59,6 +59,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
             yield GM_setValue('lang', lang);
             location.reload();
         }));
+        function parseLiahonaHrefLang(liahona, lang = "eng") {
+            liahona.title = liahona.title.replace(/([?&]lang=)[^&#]+/, `$1${lang}`);
+            liahona.author = liahona.author.replace(/([?&]lang=)[^&#]+/, `$1${lang}`);
+            liahona.kicker = liahona.kicker.replace(/([?&]lang=)[^&#]+/, `$1${lang}`);
+            liahona.contents = liahona.contents.map(c => c.replace(/([?&]lang=)[^&#]+/, `$1${lang}`));
+        }
         function getUrl(lang = "kor") {
             const url = new URL(location.href);
             url.searchParams.set('lang', lang);
@@ -182,7 +188,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
             if (body) {
                 _extractContents(body); // add contents to contents[]
             }
-            return new Liahona(getOuterHTML('div.body > header > h1'), getOuterHTML('div.body > header p.author-name'), getOuterHTML('div.body > header > p.kicker'), contents);
+            let liahona = new Liahona(getOuterHTML('div.body > header > h1'), getOuterHTML('div.body > header p.author-name'), getOuterHTML('div.body > header > p.kicker'), contents);
+            return liahona;
         }
         function fetchLiahona() {
             return __awaiter(this, arguments, void 0, function* (lang = "kor") {
@@ -191,7 +198,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
                 const res = yield fetch(korUrl, { credentials: 'same-origin' });
                 const html = yield res.text();
                 const doc = new DOMParser().parseFromString(html, "text/html");
-                return getLiahona(doc);
+                let liahona = getLiahona(doc);
+                parseLiahonaHrefLang(liahona, "eng");
+                return liahona;
             });
         }
         function renderLiahonas(original, translated) {
@@ -409,14 +418,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
             window.dispatchEvent(new Event('popstate'));
         };
         const path = location.pathname;
-        if (path.startsWith('/study/scriptures')) {
-            runScripture();
-        }
-        else if (path.startsWith('/study/general-conference')) {
-            runGeneralConference();
-        }
-        else if (path.startsWith('/study/liahona')) {
-            runLiahona();
+        const url = new URL(location.href);
+        if (url.searchParams.get('lang') != lang) {
+            if (path.startsWith('/study/scriptures')) {
+                runScripture();
+            }
+            else if (path.startsWith('/study/general-conference')) {
+                runGeneralConference();
+            }
+            else if (path.startsWith('/study/liahona')) {
+                runLiahona();
+            }
         }
     });
 })();
