@@ -42,11 +42,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
             }
         }
         class GeneralConference {
-            constructor(title, intro, summary, verses) {
+            constructor(video, title, author, kicker, contents) {
+                this.video = video;
                 this.title = title;
-                this.intro = intro;
-                this.summary = summary;
-                this.verses = verses;
+                this.author = author;
+                this.kicker = kicker;
+                this.contents = contents;
             }
         }
         const DEFAULT_LANG = 'kor';
@@ -59,11 +60,23 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
             yield GM_setValue('lang', lang);
             location.reload();
         }));
+        function parseSectionHrefLang(section, lang = "eng") {
+            section.title = section.title.replace(/([?&]lang=)[^&#"]*/g, (_m, p1) => `${p1}${lang}`);
+            section.intro = section.intro.replace(/([?&]lang=)[^&#"]*/g, (_m, p1) => `${p1}${lang}`);
+            section.summary = section.summary.replace(/([?&]lang=)[^&#"]*/g, (_m, p1) => `${p1}${lang}`);
+            section.verses = section.verses.map(c => c.replace(/([?&]lang=)[^&#"]*/g, (_m, p1) => `${p1}${lang}`));
+        }
         function parseLiahonaHrefLang(liahona, lang = "eng") {
-            liahona.title = liahona.title.replace(/([?&]lang=)[^&#]+/, `$1${lang}`);
-            liahona.author = liahona.author.replace(/([?&]lang=)[^&#]+/, `$1${lang}`);
-            liahona.kicker = liahona.kicker.replace(/([?&]lang=)[^&#]+/, `$1${lang}`);
-            liahona.contents = liahona.contents.map(c => c.replace(/([?&]lang=)[^&#]+/, `$1${lang}`));
+            liahona.title = liahona.title.replace(/([?&]lang=)[^&#"]*/g, (_m, p1) => `${p1}${lang}`);
+            liahona.author = liahona.author.replace(/([?&]lang=)[^&#"]*/g, (_m, p1) => `${p1}${lang}`);
+            liahona.kicker = liahona.kicker.replace(/([?&]lang=)[^&#"]*/g, (_m, p1) => `${p1}${lang}`);
+            liahona.contents = liahona.contents.map(c => c.replace(/([?&]lang=)[^&#"]*/g, (_m, p1) => `${p1}${lang}`));
+        }
+        function parseGeneralConferenceHrefLang(general, lang = "eng") {
+            general.title = general.title.replace(/([?&]lang=)[^&#"]*/g, (_m, p1) => `${p1}${lang}`);
+            general.author = general.author.replace(/([?&]lang=)[^&#"]*/g, (_m, p1) => `${p1}${lang}`);
+            general.kicker = general.kicker.replace(/([?&]lang=)[^&#"]*/g, (_m, p1) => `${p1}${lang}`);
+            general.contents = general.contents.map(c => c.replace(/([?&]lang=)[^&#"]*/g, (_m, p1) => `${p1}${lang}`));
         }
         function getUrl(lang = "kor") {
             const url = new URL(location.href);
@@ -93,7 +106,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
                 };
                 const verses = Array.from(doc.querySelectorAll('p.verse'))
                     .map(e => e.outerHTML);
-                return new Section(getParagraphWithClass("title-number"), getParagraphWithClass("study-intro"), getParagraphWithClass("study-summary"), verses);
+                let section = new Section(getParagraphWithClass("title-number"), getParagraphWithClass("study-intro"), getParagraphWithClass("study-summary"), verses);
+                const url = new URL(location.href);
+                parseSectionHrefLang(section, url.searchParams.get("lang"));
+                return section;
             });
         }
         function renderSections(original, translated) {
@@ -131,7 +147,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
           font-size: 18px;
           font-family: "Ensign:Serif", McKay, "McKay ldsLat", Palatino, "Palatino Linotype", Palatino-Roman, Pahoran, "Pahoran ldsLat", "Noto Sans Myanmar", NotoSansMyanmar, SaysetthaldsLao, NotoSerifTamil, serif;
           
-          
+          sup{
+            vertical-align:super !important;
+            font-size:70% !important;
+          }
           tr.title td{
             font-size: 42px;
             text-align: center;
@@ -199,7 +218,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
                 const html = yield res.text();
                 const doc = new DOMParser().parseFromString(html, "text/html");
                 let liahona = getLiahona(doc);
-                parseLiahonaHrefLang(liahona, "eng");
+                const url = new URL(location.href);
+                parseLiahonaHrefLang(liahona, url.searchParams.get("lang"));
                 return liahona;
             });
         }
@@ -273,15 +293,34 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
       </table>
     `;
         }
-        // General Conference 
-        function getGeneralConference() {
-            const getParagraphWithClass = (cls) => {
-                const element = document.querySelector(`p.${cls}`);
-                return element ? element.outerHTML : "";
+        // General Conference
+        function getGeneralConference(doc = document) {
+            const getOuterHTML = (selector) => {
+                const el = doc.querySelector(selector);
+                return el ? el.outerHTML : "";
             };
-            const verses = Array.from(document.querySelectorAll('p.verse'))
-                .map(e => e.outerHTML);
-            return new GeneralConference(getParagraphWithClass("title-number"), getParagraphWithClass("study-intro"), getParagraphWithClass("study-summary"), verses);
+            const contents = [];
+            // select allowed tags in div.body-block
+            function _extractContents(node) {
+                const allowed = new Set(['P', 'H2', 'ASIDE', 'FIGURE', 'IMG']);
+                node.childNodes.forEach(child => {
+                    if (child.nodeType !== Node.ELEMENT_NODE)
+                        return; //check only if tags
+                    const element = child;
+                    if (allowed.has(element.tagName.toUpperCase())) {
+                        contents.push(element.outerHTML);
+                    }
+                    else {
+                        _extractContents(element);
+                    }
+                });
+            }
+            const body = doc.querySelector('div.body-block');
+            if (body) {
+                _extractContents(body); // add contents to contents[]
+            }
+            let generalConference = new GeneralConference(getOuterHTML('div.body > header > div:first-of-type'), getOuterHTML('div.body > header > h1'), getOuterHTML('div.body > header p.author-name'), getOuterHTML('div.body > header > p.kicker'), contents);
+            return generalConference;
         }
         function fetchGeneralConference() {
             return __awaiter(this, arguments, void 0, function* (lang = "kor") {
@@ -290,13 +329,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
                 const res = yield fetch(korUrl, { credentials: 'same-origin' });
                 const html = yield res.text();
                 const doc = new DOMParser().parseFromString(html, "text/html");
-                const getParagraphWithClass = (cls) => {
-                    const element = doc.querySelector(`p.${cls}`);
-                    return element ? element.outerHTML : "";
-                };
-                const verses = Array.from(doc.querySelectorAll('p.verse'))
-                    .map(e => e.outerHTML);
-                return new GeneralConference(getParagraphWithClass("title-number"), getParagraphWithClass("study-intro"), getParagraphWithClass("study-summary"), verses);
+                let generalConference = getGeneralConference(doc);
+                const url = new URL(location.href);
+                parseGeneralConferenceHrefLang(generalConference, url.searchParams.get("lang"));
+                return generalConference;
             });
         }
         function renderGeneralConferences(original, translated) {
@@ -307,19 +343,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         <td>${translated.title}</td>
       </tr>
       <tr class="intro">
-        <td>${original.intro}</td>
-        <td>${translated.intro}</td>
+        <td>${original.author}</td>
+        <td>${translated.author}</td>
       </tr>
       <tr class="summary">
-        <td>${original.summary}</td>
-        <td>${translated.summary}</td>
+        <td>${original.kicker}</td>
+        <td>${translated.kicker}</td>
       </tr>`
             ];
-            for (let i = 0; i < original.verses.length; i++) {
+            for (let i = 0; i < original.contents.length; i++) {
                 rows.push(`
         <tr class="verse">
-          <td>${original.verses[i]}</td>
-          <td>${translated.verses[i]}</td>
+          <td>${original.contents[i]}</td>
+          <td>${translated.contents[i]}</td>
         </tr>
       `);
             }
@@ -385,8 +421,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
                 const original_GeneralConference = getGeneralConference();
                 const translated_GeneralConference = yield fetchGeneralConference(lang);
                 const wrapper = document.querySelector('div[class^="contentWrapper-"]');
+                clearGeneralConference();
                 if (wrapper) {
-                    wrapper.innerHTML = renderGeneralConferences(original_GeneralConference, translated_GeneralConference);
+                    wrapper.innerHTML += renderGeneralConferences(original_GeneralConference, translated_GeneralConference);
+                }
+                function clearGeneralConference() {
+                    document.querySelector('div.body-block').innerHTML = "";
+                    const header = document.querySelector('div.body > header');
+                    const video = header.querySelector("div:first-of-type");
+                    Array.from(header.children).forEach(child => {
+                        if (child !== video) {
+                            child.remove();
+                        }
+                    });
                 }
             });
         }
@@ -420,10 +467,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         const path = location.pathname;
         const url = new URL(location.href);
         if (url.searchParams.get('lang') != lang) {
+            const isMayOrNov = /\/study\/liahona\/\d{4}\/(05|11)(?:[/?]|$)/.test(path);
             if (path.startsWith('/study/scriptures')) {
                 runScripture();
             }
             else if (path.startsWith('/study/general-conference')) {
+                runGeneralConference();
+            }
+            else if (path.startsWith('/study/liahona') && isMayOrNov) {
                 runGeneralConference();
             }
             else if (path.startsWith('/study/liahona')) {
