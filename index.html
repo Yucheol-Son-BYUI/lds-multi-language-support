@@ -10,7 +10,7 @@
     // auto redirect based on user's language
     const DEFAULT_LANG = "EN";
     const lang = navigator.language.slice(0,2) || DEFAULT_LANG;
-    const BASE_URL = "https://yucheol-son-byui.github.io/lds-multi-language-support/doc/";
+    const BASE_URL = "https://yucheol-son-byui.github.io/lds-multi-language-support/docs/";
 
     fetch(BASE_URL + `install_${lang}.md`, {method:'HEAD'})
       .then(res => res.text())
