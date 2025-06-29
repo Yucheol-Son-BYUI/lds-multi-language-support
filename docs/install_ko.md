@@ -1,7 +1,7 @@
 ---
 layout: default
 title: 설치 방법
-permalink: /install_ko.md
+permalink: /docs/install_ko.html
 ---
 ## lds-multi-language-support
 

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: step to install
-permalink: /install_en.md
+permalink: /docs/install_en.html
 ---
 ## lds-multi-language-support
 
