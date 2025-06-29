@@ -1,13 +1,17 @@
 // ==UserScript==
 // @name         LDS bible multi-language support
 // @namespace    http://tampermonkey.net/
-// @version      2025-06-20
+// @version      2025-06-29
 // @description  Read the multi-language versions of LDS scriptures simultaneously
 // @author       Yucheol Arthur Son
 // @match        https://www.churchofjesuschrist.org/study/scriptures*
 // @match        https://www.churchofjesuschrist.org/study/general-conference/*/*/*
 // @match        https://www.churchofjesuschrist.org/study/liahona/*/*/*
 // @icon         https://www.churchofjesuschrist.org/services/platform/v4/resources/static/image/favicon.ico
+// @updateURL    https://yucheol-son-byui.github.io/lds-multi-language-support/src/lds-multi-language-support.user.js
+// @downloadURL  https://yucheol-son-byui.github.io/lds-multi-language-support/src/lds-multi-language-support.user.js
+// @homepageURL  https://github.com/Yucheol-Son-BYUI/lds-multi-language-support
+// @supportURL   https://github.com/Yucheol-Son-BYUI/lds-multi-language-support/issues
 // @grant        GM_registerMenuCommand
 // @grant        GM_getValue
 // @grant        GM_setValue

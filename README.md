@@ -12,8 +12,8 @@ Steps to build and/or run the software:
 
 1. Install [TamperMonkey](https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo) on Chrome Web Store(PC)
 
-2. Download below script(js) and upload to your tamperonkey
-   - [lds-multi-language-support](https://github.com/Yucheol-Son-BYUI/lds-multi-language-support/blob/main/src/lds-multi-language-support.js)
+2. Download script from below
+   - [lds-multi-language-support](https://yucheol-son-byui.github.io/lds-multi-language-support/src/lds-multi-language-support.user.js)
 
 ## Development Environment
 
