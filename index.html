@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // auto redirect based on user's language
+    const DEFAULT_LANG = "EN";
+    const lang = navigator.language.slice(0,2) || DEFAULT_LANG;
+    const BASE_URL = "https://yucheol-son-byui.github.io/lds-multi-language-support/doc/";
+
+    fetch(BASE_URL + `install_${lang}.md`, {method:'HEAD'})
+      .then(res => res.text())
+      .then(md => {
+        // if exist 
+        window.location.replace(BASE_URL+`install_${lang}.md`)
+      })
+      .catch(err => {
+        console.error(err);
+        window.location.replace(BASE_URL+`install_${DEFAULT_LANG}.md`)
+      });
+  </script>
+</body>
+</html>
