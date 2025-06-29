@@ -48,15 +48,15 @@
     const lang = navigator.language.slice(0,2) || DEFAULT_LANG;
     const BASE_URL = "https://yucheol-son-byui.github.io/lds-multi-language-support/docs/";
 
-    fetch(BASE_URL + `install_${lang}.md`, {method:'HEAD'})
+    fetch(BASE_URL + `install_${lang}.html`, {method:'HEAD'})
       .then(res => res.text())
       .then(md => {
         // if exist 
-        window.location.replace(BASE_URL+`install_${lang}.md`)
+        window.location.replace(BASE_URL+`install_${lang}.html`)
       })
       .catch(err => {
         console.error(err);
-        window.location.replace(BASE_URL+`install_${DEFAULT_LANG}.md`)
+        window.location.replace(BASE_URL+`install_${DEFAULT_LANG}.html`)
       });
   </script>
 

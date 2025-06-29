@@ -6,6 +6,8 @@
 
 **Project Goals**: Provide support for users to view two language versions of the scriptures simultaneously.
 
+[Wanna read Another 🌍Language](https://yucheol-son-byui.github.io/lds-multi-language-support/index.html)
+
 ## Instructions for Build and Use
 
 Steps to build and/or run the software:
@@ -14,6 +16,7 @@ Steps to build and/or run the software:
 
 2. Download script from below
    - [lds-multi-language-support](https://yucheol-son-byui.github.io/lds-multi-language-support/src/lds-multi-language-support.user.js)
+
 
 ## Development Environment
 
