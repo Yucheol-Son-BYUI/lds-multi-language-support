@@ -11,7 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 // ==UserScript==
 // @name         LDS bible multi-language support
 // @namespace    http://tampermonkey.net/
-// @version      2025-06-29
+// @version      2025-06-30
 // @description  Read the multi-language versions of LDS scriptures simultaneously
 // @author       Yucheol Arthur Son
 // @match        https://www.churchofjesuschrist.org/study/scriptures/*/*/*
