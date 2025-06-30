@@ -9,7 +9,7 @@ permalink: /docs/install_en.html
 
 - Provide support for users to view two language versions of the scriptures simultaneously.
 
-![Example](/docs/screenshot.png)
+![Example](https://yucheol-son-byui.github.io/lds-multi-language-support/docs/screenshot.png)
 
 ## Step to Install
 

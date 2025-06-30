@@ -8,7 +8,7 @@
 
 [Wanna read Another 🌍Language](https://yucheol-son-byui.github.io/lds-multi-language-support/index.html)
 
-![Example](/docs/screenshot.png)
+![Example](https://yucheol-son-byui.github.io/lds-multi-language-support/docs/screenshot.png)
 
 ## Instructions for Build and Use
 

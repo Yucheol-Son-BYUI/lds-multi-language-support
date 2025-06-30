@@ -7,7 +7,7 @@ permalink: /docs/install_ko.html
 
 - Tamper Monkey에서 사용되는 유저스크립트입니다. LDS 사이트에서 두 개의 언어 버전을 동시에 읽을 수 있도록 레이아웃을 변경합니다.
 
-![Example](/docs/screenshot.png)
+![Example](https://yucheol-son-byui.github.io/lds-multi-language-support/docs/screenshot.png)
 
 ## 설치 방법
 
