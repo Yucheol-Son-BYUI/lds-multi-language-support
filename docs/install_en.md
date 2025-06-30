@@ -9,6 +9,8 @@ permalink: /docs/install_en.html
 
 - Provide support for users to view two language versions of the scriptures simultaneously.
 
+![Example](/docs/screenshot.png)
+
 ## Step to Install
 
 1. Install [TamperMonkey](https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo) on Chrome Web Store(PC)

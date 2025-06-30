@@ -8,6 +8,8 @@
 
 [Wanna read Another 🌍Language](https://yucheol-son-byui.github.io/lds-multi-language-support/index.html)
 
+![Example](/docs/screenshot.png)
+
 ## Instructions for Build and Use
 
 Steps to build and/or run the software:

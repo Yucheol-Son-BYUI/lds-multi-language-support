@@ -7,6 +7,8 @@ permalink: /docs/install_ko.html
 
 - Tamper Monkey에서 사용되는 유저스크립트입니다. LDS 사이트에서 두 개의 언어 버전을 동시에 읽을 수 있도록 레이아웃을 변경합니다.
 
+![Example](/docs/screenshot.png)
+
 ## 설치 방법
 
 1. 크롬 웹 스토어에서 [TamperMonkey](https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)를 설치하세요.
