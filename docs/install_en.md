@@ -15,7 +15,7 @@ permalink: /docs/install_en.html
 
 - Liahona/General Conference
 
-P.S. 알 수 없는 이유로 연차대회 비디오 재생은 불가능합니다. 비디오 시청 시 유저스크립트를 끄고 시청해주세요.
+P.S. For reasons unknown, playback of the annual conference video is not possible. Please disable your userscript when watching the video.
 
 ![Example](https://yucheol-son-byui.github.io/lds-multi-language-support/docs/screenshot.png)
 
