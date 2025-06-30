@@ -24,6 +24,24 @@ P.S. 알 수 없는 이유로 연차대회 비디오 재생은 불가능합니�
 2. 아래 링크에서 install을 클릭하세요.
    - [lds-multi-language-support](https://yucheol-son-byui.github.io/lds-multi-language-support/src/lds-multi-language-support.user.js)
 
+3. [lds 경전](https://www.churchofjesuschrist.org/study/scriptures/nt/acts/2?lang=eng) 사이트에 접속하세요.
+
+### 언어 변경 방법
+
+0. [여기서](https://www.churchofjesuschrist.org/languages?lang=eng&langs=*) 함께 보고 싶은 언어를 선택하세요.
+
+1. 3글자로 된 언어 코드(lang=???)를 기억하세요. (Ex. korean -> kor, english -> eng, japanese -> jpn) 
+
+![change0](https://yucheol-son-byui.github.io/lds-multi-language-support/docs/option1.png)
+
+2. 브라우저 우측 상단에서 확장 프로그램-Tampermonkey를 클릭하세요
+
+![change1](https://yucheol-son-byui.github.io/lds-multi-language-support/docs/option1.png)
+
+3. Set scripture language를 클릭하고 1번에서 기억한 언어 코드를 입력하세요
+
+![change2](https://yucheol-son-byui.github.io/lds-multi-language-support/docs/option2.png)
+
 ## 문제 발생시
 
 - 문제 발생 시 [Issues](https://github.com/Yucheol-Son-BYUI/lds-multi-language-support/issues)에 문제를 올리거나 ldsycson@gmail.com에 이메일을 보내주세요

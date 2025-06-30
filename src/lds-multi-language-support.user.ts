@@ -4,7 +4,7 @@
 // @version      2025-06-29
 // @description  Read the multi-language versions of LDS scriptures simultaneously
 // @author       Yucheol Arthur Son
-// @match        https://www.churchofjesuschrist.org/study/scriptures*
+// @match        https://www.churchofjesuschrist.org/study/scriptures/*/*/*
 // @match        https://www.churchofjesuschrist.org/study/general-conference/*/*/*
 // @match        https://www.churchofjesuschrist.org/study/liahona/*/*/*
 // @icon         https://www.churchofjesuschrist.org/services/platform/v4/resources/static/image/favicon.ico
