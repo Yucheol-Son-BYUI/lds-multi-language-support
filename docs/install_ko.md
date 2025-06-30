@@ -7,6 +7,14 @@ permalink: /docs/install_ko.html
 
 - Tamper Monkey에서 사용되는 유저스크립트입니다. LDS 사이트에서 두 개의 언어 버전을 동시에 읽을 수 있도록 레이아웃을 변경합니다.
 
+## 지원하는 경전
+
+- 구약/신약/몰몬경/값진 진주/교리와 성약
+
+- 리아호나/연차대회
+
+P.S. 알 수 없는 이유로 연차대회 비디오 재생은 불가능합니다. 비디오 시청 시 유저스크립트를 끄고 시청해주세요.
+
 ![Example](https://yucheol-son-byui.github.io/lds-multi-language-support/docs/screenshot.png)
 
 ## 설치 방법

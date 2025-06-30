@@ -9,6 +9,14 @@ permalink: /docs/install_en.html
 
 - Provide support for users to view two language versions of the scriptures simultaneously.
 
+## Supported scriptures
+
+- old testament/new testament/Book of Mormon/D&C/Pearl of Great Price
+
+- Liahona/General Conference
+
+P.S. 알 수 없는 이유로 연차대회 비디오 재생은 불가능합니다. 비디오 시청 시 유저스크립트를 끄고 시청해주세요.
+
 ![Example](https://yucheol-son-byui.github.io/lds-multi-language-support/docs/screenshot.png)
 
 ## Step to Install

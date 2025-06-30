@@ -6,6 +6,12 @@
 
 **Project Goals**: Provide support for users to view two language versions of the scriptures simultaneously.
 
+## Supported scriptures
+
+- old testament/new testament/Book of Mormon/D&C/Pearl of Great Price
+
+- Liahona/General Conference
+
 [Wanna read Another 🌍Language](https://yucheol-son-byui.github.io/lds-multi-language-support/index.html)
 
 ![Example](https://yucheol-son-byui.github.io/lds-multi-language-support/docs/screenshot.png)
