@@ -32,7 +32,7 @@ P.S. 알 수 없는 이유로 연차대회 비디오 재생은 불가능합니�
 
 1. 3글자로 된 언어 코드(lang=???)를 기억하세요. (Ex. korean -> kor, english -> eng, japanese -> jpn) 
 
-![change0](https://yucheol-son-byui.github.io/lds-multi-language-support/docs/option1.png)
+![change0](https://yucheol-son-byui.github.io/lds-multi-language-support/docs/option0.png)
 
 2. 브라우저 우측 상단에서 확장 프로그램-Tampermonkey를 클릭하세요
 

@@ -33,7 +33,7 @@ Steps to build and/or run the software:
 
 1. Remember the 3-letter code of your language. (Ex. korean -> kor, english -> eng, japanese -> jpn) 
 
-![change0](https://yucheol-son-byui.github.io/lds-multi-language-support/docs/option1.png)
+![change0](https://yucheol-son-byui.github.io/lds-multi-language-support/docs/option0.png)
 
 2. Click Tampermonkey on top-right side of browser
 
